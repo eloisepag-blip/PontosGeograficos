@@ -1,0 +1,1 @@
+const API_URL = "https://geopoint-6x4u.onrender.com/api/points";

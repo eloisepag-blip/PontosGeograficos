@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pontos Geografícos</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <main>
+        <selection>
+            <h2>Pontos Geografícos</h2>
+            <div class="Pesquisa">
+                <label for=""buscar-pontos">Pesquisar ponto:</label>
+                <input
+                type="search"
+                id="buscar-pontos"
+                placeholder="Digite o nome do ponto"
+                >
+            </div>
+            <a href="formulario.html" class="botao-cadastrar">Cadastrar Pontos</a>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Descrição</th>
+                        <th>Latitude</th>
+                        <th>Longitude</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+
+                <tbody id="lista-pontos">
+                </tbody>
+            </table>
+            <p id="mensagem-pontos"></p>
+        </selection>
+    </main>
+    
+</body>
+</html>
