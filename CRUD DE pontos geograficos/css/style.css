@@ -1,118 +1,152 @@
-    body {
-        margin: 0;
-        padding: 0;
-        font-family: Arial, sans-serif;
-        background-color: #ffffff;
-        color: #000000;
-    }
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #ffffff;
+    color: #000000;
+}
 
+main {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+h2 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 25px;
+}
+
+/* Pesquisa da listagem */
+.Pesquisa {
+    margin-bottom: 20px;
+}
+
+.Pesquisa input {
+    padding: 10px;
+    border: 1px solid #000000;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+/* Botão de cadastrar */
+.botao-cadastrar {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #000000;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 6px;
+    margin-bottom: 20px;
+}
+
+/* Tabela de pontos */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #dddddd;
+}
+
+th {
+    background-color: #f5f5f5;
+    font-weight: bold;
+}
+
+/* Campos do formulário */
+.campo {
+    margin-bottom: 20px;
+}
+
+.campo label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+.campo input,
+.campo textarea {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #000000;
+    border-radius: 10px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+/* Formulário de pontos */
+#form-ponto {
+    max-width: 322px;
+    width: 100%;
+    background-color: #eeeeee;
+}
+
+/* Botões */
+.botoes {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.botoes button,
+.botoes a {
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.botoes button {
+    background-color: #000000;
+    color: #ffffff;
+    border: none;
+}
+
+.botoes a {
+    background-color: #eeeeee;
+    color: #000000;
+}
+
+/* Detalhes do ponto geográfico */
+#detalhes-ponto {
+    margin-top: 25px;
+}
+
+#detalhes-ponto .campo p {
+    margin-top: 8px;
+    padding: 12px;
+    background-color: #f2f2f2;
+    border-radius: 6px;
+    min-height: 20px;
+}
+
+/* Responsividade */
+@media (max-width: 600px) {
     main {
-        max-width: 1000px;
-        margin: 40px auto;
-        padding: 20px;
+        margin: 20px auto;
+        padding: 15px;
     }
 
-    h2 {
-        font-size: 24px;
-        font-weight: bold;
-        margin-bottom: 25px;
-    }
-    .Pesquisa {
-        margin-bottom: 20px;
-    }
-
-    .Pesquisa input {
-        padding: 10px;
-        border: 1px solid #000000;
-        border-radius: 6px;
-        font-size: 14px;
-    }
-    .botao-cadastrar {
-        display: inline-block;
-        padding: 10px 20px;
-        background-color: #000000;
-        color: #ffffff;
-        text-decoration: none;
-        border-radius: 6px;
-        margin-bottom: 20px;
-    }
-    
-    table{
-        width: 100%;
-        border-bottom: collapse;
+    table {
+        font-size: 12px;
     }
 
     th, td {
-        padding: 12px;
-        text-align: left;
-        border-bottom: 1px solid #dddddd;
-    }
-
-    th {
-        background-color: #f5f5f5;
-        font-weight: bold;
-    }
-
-    .campo {
-        margin-bottom: 20px;
-    }
-
-    .campo label {
-        display: block;
-        margin-bottom: 8px;
-        font-size: 14px;
-    }
-
-    .campo input,
-    .campo textarea {
-        width: 100%;
-        padding: 10px;
-        border: 2px solid #000000;
-        border-radius: 10px;
-        font-size: 14px;
-        box-sizing: border-box;
-    }
-
-    #form-ponto {
-        max-width: 322px;
-        width: 100%;
-        background-color: #eeeeee;
+        padding: 8px;
     }
 
     .botoes {
-        display: flex;
-        gap: 15px;
-        margin-top: 20px;
+        flex-wrap: wrap;
     }
+}
 
-    .botoes button,
-    .botoes a {
-        padding: 10px 20px;
-        border-radius: 6px;
-        font-size: 14px;
-        cursor: pointer;
-        text-decoration: none;
-    }
-
-    .botoes button {
-        background-color: #000000;
-        color: #ffffff;
-        border: none;
-    }
-
-    .botoes a {
-        background-color: #eeeeee;
-        color:#000000
-    }
-
-
-    #form-ponto {
-        max-width: 322px;
-        width: 100%;
-        background-color: #eeeeee;
-    }
-
-
+    
 
 
 

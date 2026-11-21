@@ -1,38 +1,41 @@
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
-        <link rel="stylesheet" href="css/style.css">
-    </head>
-    <body>
-        <main>
-            <selection>
-                <h2>Cadastrar Pontos Geográficos </h2>
-                <form id="from-ponto">
-                    <div class="campo">
-                        <label for="name">Nome do ponto:</label>
-                        <input
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastrar Pontos Geográficos</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <main>
+        <section>
+            <h2>Cadastrar Pontos Geográficos</h2>
+
+            <form id="form-ponto">
+                <div class="campo">
+                    <label for="name">Nome do ponto:</label>
+                    <input
                         type="text"
                         id="name"
                         name="name"
                         maxlength="100"
                         required
-                        >
-                    </div>
-                    <div class="campo">
-                        <label for="description">Descrição:</label>
-                        <textarea
+                    >
+                </div>
+
+                <div class="campo">
+                    <label for="description">Descrição:</label>
+                    <textarea
                         id="description"
                         name="description"
                         maxlength="255"
                         rows="4"
-                        ></textarea>
-                    </div>
-                    <div class="campo">
-                        <label for="latitude">Latitude:</label>
-                        <input
+                    ></textarea>
+                </div>
+
+                <div class="campo">
+                    <label for="latitude">Latitude:</label>
+                    <input
                         type="number"
                         id="latitude"
                         name="latitude"
@@ -40,12 +43,12 @@
                         max="90"
                         step="any"
                         required
-                        >
-                    </div>
-                    
-                    <div class="campo">
-                        <label for="longitude">Longitude:</label>
-                        <input
+                    >
+                </div>
+
+                <div class="campo">
+                    <label for="longitude">Longitude:</label>
+                    <input
                         type="number"
                         id="longitude"
                         name="longitude"
@@ -53,17 +56,18 @@
                         max="180"
                         step="any"
                         required
-                        >
-                    </div>
+                    >
+                </div>
 
-                    <div class="botoes">
-                        <button type="submit">Salvar</button>
-                        <a href="index.html">Cancelar</a>
-                    </div>
+                <div class="botoes">
+                    <button type="submit">Salvar</button>
+                    <a href="index.html">Cancelar</a>
+                </div>
+            </form>
+        </section>
+    </main>
 
-                </form>
-            </selection>
-        </main>
-        
-    </body>
-    </html>
+    <script src="js/api.js"></script>
+    <script src="js/formulario.js"></script>
+</body>
+</html>

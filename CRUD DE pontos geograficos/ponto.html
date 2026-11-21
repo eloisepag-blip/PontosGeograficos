@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalhes do Ponto</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <main>
+        <section>
+            <h2>Detalhes do Ponto Geográfico</h2>
+
+            <div id="mensagem-ponto"></div>
+
+            <div id="detalhes-ponto">
+                <div class="campo">
+                    <strong>Nome:</strong>
+                    <p id="nome-ponto">Carregando...</p>
+                </div>
+
+                <div class="campo">
+                    <strong>Descrição:</strong>
+                    <p id="descricao-ponto">Carregando...</p>
+                </div>
+
+                <div class="campo">
+                    <strong>Latitude:</strong>
+                    <p id="latitude-ponto">Carregando...</p>
+                </div>
+
+                <div class="campo">
+                    <strong>Longitude:</strong>
+                    <p id="longitude-ponto">Carregando...</p>
+                </div>
+            </div>
+
+            <div class="botoes">
+                <a href="index.html">Voltar</a>
+                <a id="botao-editar" href="#">Editar</a>
+                <button id="botao-excluir" type="button">Excluir</button>
+            </div>
+        </section>
+    </main>
+
+    <script src="js/api.js"></script>
+    <script src="js/detalhe.js"></script>
+</body>
+</html>
