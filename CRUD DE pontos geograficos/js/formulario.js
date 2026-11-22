@@ -8,6 +8,12 @@ const formulario = document.getElementById("form-ponto");
 const titulo = document.querySelector("h2");
 const botaoSalvar = formulario.querySelector('button[type="submit"]');
 
+function mostrarErro(campo, mensagem) {
+    const elementoErro = document.getElementById(`erro-${campo}`);
+
+    elementoErro.textContent = mensagem;
+}
+
 async function carregarPonto() {
     try {
         const resposta = await fetch(`${API_URL}/${id}`);
@@ -39,6 +45,10 @@ if (id) {
 
 formulario.addEventListener("submit", async function (evento) {
     evento.preventDefault();
+    
+    mostrarErro("name", "");
+    mostrarErro("latitude", "");
+    mostrarErro("longitude", "");
 
     const ponto = {
         name: document.getElementById("name").value.trim(),
@@ -47,17 +57,31 @@ formulario.addEventListener("submit", async function (evento) {
         longitude: Number(document.getElementById("longitude").value)
     };
 
-    if (
+    if (ponto.name === "") {
+    mostrarErro("name", "O nome do ponto não pode estar vazio.");
+    return;
+}
+
+    if(
+        document.getElementById("latitude").value.trim() === "" ||
         !Number.isFinite(ponto.latitude) ||
-        !Number.isFinite(ponto.longitude) ||
         ponto.latitude < -90 ||
-        ponto.latitude > 90 ||
-        ponto.longitude < -180 ||
-        ponto.longitude > 180
+        ponto.latitude > 90
     ) {
-        alert("Informe uma latitude entre -90 e 90 e uma longitude entre -180 e 180.");
+        mostrarErro("latitude", "A latitude deve estar entre -90 e 90. ");
         return;
     }
+
+    if (
+        document.getElementById("longitude").value.trim() ==="" ||
+        !Number.isFinite(ponto.longitude) ||
+        ponto.longitude < -180 ||
+        ponto.longitude > 180
+    ){
+        mostrarErro("longitude", "A longitude deve estar entre -180 e 180.");
+        return;
+    }
+
 
     botaoSalvar.disabled = true;
     botaoSalvar.textContent = "Salvando...";

@@ -31,7 +31,7 @@
                 <p>O mapa de localização ficará disponível nesta área.</p>
             </div>
 
-            <form id="form-ponto">
+            <form id="form-ponto" novalidate>
 
                 <div class="campo">
                     <label for="name">Nome do ponto:</label>
@@ -42,6 +42,7 @@
                         maxlength="100"
                         required
                     >
+                    <small id="erro-name" class="mensagem-erro"></small>
                 </div>
 
                 <div class="campo">
@@ -65,6 +66,7 @@
                         step="any"
                         required
                     >
+                    <small id="erro-latitude" class="mensagem-erro"></small>
                 </div>
 
                 <div class="campo">
@@ -78,6 +80,7 @@
                         step="any"
                         required
                     >
+                    <small id="erro-longitude" class="mensagem-erro"></small>
                 </div>
 
                 <div class="botoes">
