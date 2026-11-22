@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GeoPoint - Pontos Geográficos</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+    
 </head>
 <body>
 
@@ -26,8 +28,7 @@
             </div>
 
             <div class="area-mapa">
-                <h3>Mapa de localização</h3>
-                <p>Os pontos geográficos poderão ser visualizados nesta área.</p>
+                <div id="mapa"></div>
             </div>
 
             <div class="barra-acoes">
@@ -68,6 +69,7 @@
         </section>
     </main>
 
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="js/api.js"></script>
     <script src="js/lista.js"></script>
 
