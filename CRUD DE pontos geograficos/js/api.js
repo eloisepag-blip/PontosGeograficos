@@ -1,26 +1,33 @@
-    window.API_URL = "https://geopoint-6x4u.onrender.com/api/points";
+   window.API_URL = "https://geopoint-6x4u.onrender.com/api/points";
 
-    async function listarPontos() {
-        const resposta = await fetch(window.API_URL);
+// Listar todos os pontos
+async function listarPontos() {
+    const resposta = await fetch(window.API_URL);
 
-        if(!resposta.ok) {
-            throw new Error("Não foi possível carregar os pontos.");
-        }
-
-        return await resposta.json();
+    if (!resposta.ok) {
+        throw new Error("Não foi possível carregar os pontos.");
     }
 
-    async function buscarPontos(id) {
-        const respostas = await fetch (`${window.API_URL}/${id}`);
+    return await resposta.json();
+}
 
-        if (!resposta.ok) {
-            throw new Error("Não foi possivel buscar o ponto.");
+// Buscar um ponto pelo ID
+async function buscarPonto(id) {
+    const resposta = await fetch(`${window.API_URL}/${id}`);
+
+    if (!resposta.ok) {
+        if (resposta.status === 404) {
+            throw new Error("Ponto não encontrado.");
         }
 
-        return await respostas.json();
+        throw new Error("Não foi possível buscar o ponto.");
     }
 
-    async function criarPonto(ponto) {
+    return await resposta.json();
+}
+
+// Criar um ponto
+async function criarPonto(ponto) {
     const resposta = await fetch(window.API_URL, {
         method: "POST",
         headers: {
@@ -34,8 +41,10 @@
     }
 
     return await resposta.json();
-    }
-    async function atualizarPonto(id, ponto) {
+}
+
+// Atualizar um ponto
+async function atualizarPonto(id, ponto) {
     const resposta = await fetch(`${window.API_URL}/${id}`, {
         method: "PUT",
         headers: {
@@ -49,9 +58,10 @@
     }
 
     return await resposta.json();
-    }
+}
 
-    async function excluirPontoAPI(id) {
+// Excluir um ponto
+async function excluirPontoAPI(id) {
     const resposta = await fetch(`${window.API_URL}/${id}`, {
         method: "DELETE"
     });
@@ -59,4 +69,4 @@
     if (!resposta.ok) {
         throw new Error("Não foi possível excluir o ponto.");
     }
-    }
+}
