@@ -12,13 +12,18 @@
         try {
             mensagem.textContent = "Carregando pontos...";
 
-            const pontos = await listarPontos();
+            pontos = await listarPontos();
 
             mostrarPontos(pontos);
 
         } catch (erro) {
             mensagem.textContent = erro.message;
         }
+    }
+    function criarCelula(texto) {
+        const celula = document.createElement("id");
+        celula.textContent = texto;
+        return celula;
     }
 
     // Mostrar os pontos na tabela
@@ -35,17 +40,10 @@
         lista.forEach(function (ponto) {
             const linha = document.createElement("tr");
 
-            const nome = document.createElement("td");
-            nome.textContent = ponto.name;
-
-            const descricao = document.createElement("td");
-            descricao.textContent = ponto.description || "Sem descrição";
-
-            const latitude = document.createElement("td");
-            latitude.textContent = ponto.latitude;
-
-            const longitude = document.createElement("td");
-            longitude.textContent = ponto.longitude;
+            const nome = criarCelula(ponto.name);
+            const descricao = criarCelula(ponto.description || "Sem descrição");
+            const latitude = criarCelula(ponto.latitude);
+            const longitude = criarCelula(ponto.longitude);
 
             const acoes = document.createElement("td");
 
