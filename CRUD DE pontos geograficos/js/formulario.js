@@ -6,6 +6,7 @@ const id = parametros.get("id");
 
 const formulario = document.getElementById("form-ponto");
 const titulo = document.querySelector("h2");
+const botaoSalvar = formulario.querySelector('button[type="submit"]');
 
 async function carregarPonto() {
     try {
@@ -31,7 +32,7 @@ async function carregarPonto() {
 
 if (id) {
     titulo.textContent = "Editar Ponto Geográfico";
-    formulario.querySelector('button[type="submit"]').textContent = "Atualizar";
+    botaoSalvar.textContent = "Atualizar";
 
     carregarPonto();
 }
@@ -45,6 +46,21 @@ formulario.addEventListener("submit", async function (evento) {
         latitude: Number(document.getElementById("latitude").value),
         longitude: Number(document.getElementById("longitude").value)
     };
+
+    if (
+        !Number.isFinite(ponto.latitude) ||
+        !Number.isFinite(ponto.longitude) ||
+        ponto.latitude < -90 ||
+        ponto.latitude > 90 ||
+        ponto.longitude < -180 ||
+        ponto.longitude > 180
+    ) {
+        alert("Informe uma latitude entre -90 e 90 e uma longitude entre -180 e 180.");
+        return;
+    }
+
+    botaoSalvar.disabled = true;
+    botaoSalvar.textContent = "Salvando...";
 
     try {
         const resposta = await fetch(
@@ -68,5 +84,9 @@ formulario.addEventListener("submit", async function (evento) {
 
     } catch (erro) {
         alert(erro.message);
+
+    } finally {
+        botaoSalvar.disabled = false;
+        botaoSalvar.textContent = id ? "Atualizar" : "Salvar";
     }
 });

@@ -1,17 +1,38 @@
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastrar Pontos Geográficos</title>
+    <title>GeoPoint - Cadastrar Ponto</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+
+    <header class="cabecalho">
+        <h1>GeoPoint</h1>
+
+        <nav>
+            <a href="index.html">Pontos</a>
+            <a href="formulario.html">Cadastrar</a>
+        </nav>
+    </header>
+
     <main>
-        <section>
-            <h2>Cadastrar Pontos Geográficos</h2>
+        <section class="secao-formulario">
+
+            <div class="titulo-pagina">
+                <h2>Cadastrar Ponto Geográfico</h2>
+                <p>Preencha os dados para adicionar um novo ponto.</p>
+            </div>
+
+            <div class="area-mapa">
+                <h3>Localização do ponto</h3>
+                <p>O mapa de localização ficará disponível nesta área.</p>
+            </div>
 
             <form id="form-ponto">
+
                 <div class="campo">
                     <label for="name">Nome do ponto:</label>
                     <input
@@ -63,11 +84,13 @@
                     <button type="submit">Salvar</button>
                     <a href="index.html">Cancelar</a>
                 </div>
+
             </form>
         </section>
     </main>
 
     <script src="js/api.js"></script>
     <script src="js/formulario.js"></script>
+
 </body>
 </html>

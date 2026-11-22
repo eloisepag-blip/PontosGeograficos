@@ -1,19 +1,35 @@
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Detalhes do Ponto</title>
+    <title>GeoPoint - Detalhes do Ponto</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+
+    <header class="cabecalho">
+        <h1>GeoPoint</h1>
+
+        <nav>
+            <a href="index.html">Pontos</a>
+            <a href="formulario.html">Cadastrar</a>
+        </nav>
+    </header>
+
     <main>
-        <section>
-            <h2>Detalhes do Ponto Geográfico</h2>
+        <section class="secao-detalhes">
+
+            <div class="titulo-pagina">
+                <h2>Detalhes do Ponto Geográfico</h2>
+                <p>Confira as informações do ponto selecionado.</p>
+            </div>
 
             <div id="mensagem-ponto"></div>
 
             <div id="detalhes-ponto">
+
                 <div class="campo">
                     <strong>Nome:</strong>
                     <p id="nome-ponto">Carregando...</p>
@@ -33,6 +49,7 @@
                     <strong>Longitude:</strong>
                     <p id="longitude-ponto">Carregando...</p>
                 </div>
+
             </div>
 
             <div class="botoes">
@@ -40,10 +57,12 @@
                 <a id="botao-editar" href="#">Editar</a>
                 <button id="botao-excluir" type="button">Excluir</button>
             </div>
+
         </section>
     </main>
 
     <script src="js/api.js"></script>
     <script src="js/detalhe.js"></script>
+
 </body>
 </html>
