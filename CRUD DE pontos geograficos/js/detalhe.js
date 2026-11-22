@@ -6,6 +6,11 @@ const id = parametros.get("id");
 const mensagem = document.getElementById("mensagem-ponto");
 const detalhes = document.getElementById("detalhes-ponto");
 const botaoExcluir = document.getElementById("botao-excluir");
+const botaoEditar = document.getElementById("botao-editar");
+
+botaoEditar.style.pointerEvents = "none";
+botaoEditar.style.opacity = "0.5";
+botaoExcluir.disabled = true;
 
 async function buscarPonto() {
     if (!id) {
@@ -19,8 +24,12 @@ async function buscarPonto() {
 
         const resposta = await fetch(`${API_URL}/${id}`);
 
+        if (resposta.status === 404) {
+            throw new Error("Ponto não encontrado.");
+        }
+
         if (!resposta.ok) {
-            throw new Error("Não foi possível buscar o ponto.");
+             throw new Error("Ocorreu um erro ao carregar o ponto. Tente novamente.");
         }
 
         const ponto = await resposta.json();
@@ -32,19 +41,28 @@ async function buscarPonto() {
 
         document.getElementById("botao-editar").href = `formulario.html?id=${id}`;
 
+        botaoEditar.style.pointerEvents = "auto";
+        botaoEditar.style.opacity = "1";
+        botaoExcluir.disabled = false;
+
         mensagem.textContent = "";
 
     } catch (erro) {
-        mensagem.textContent = erro.message;
-        detalhes.style.display = "none";
-        botaoExcluir.disabled = true;
-    }
+    mensagem.textContent = erro.message;
+    detalhes.style.display = "none";
+    botaoEditar.style.pointerEvents = "none";
+    botaoEditar.style.opacity = "0.5";
+    botaoExcluir.disabled = true;
+}
 }
 
 buscarPonto();
 
 // Excluir ponto
 botaoExcluir.addEventListener("click", async function () {
+    if (botaoExcluir.disabled) {
+    return;
+    }
     if (!id) {
         return;
     }
@@ -54,6 +72,9 @@ botaoExcluir.addEventListener("click", async function () {
     if (!confirmar) {
         return;
     }
+
+    botaoExcluir.disabled = true;
+    botaoExcluir.textContent = "Excluindo...";
 
     try {
         const resposta = await fetch(`${API_URL}/${id}`, {
@@ -68,6 +89,8 @@ botaoExcluir.addEventListener("click", async function () {
         window.location.href = "index.html";
 
     } catch (erro) {
-        alert(erro.message);
-    }
+    alert(erro.message);
+    botaoExcluir.disabled = false;
+    botaoExcluir.textContent = "Excluir";
+    } 
 });
