@@ -16,13 +16,7 @@ function mostrarErro(campo, mensagem) {
 
 async function carregarPonto() {
     try {
-        const resposta = await fetch(`${API_URL}/${id}`);
-
-        if (!resposta.ok) {
-            throw new Error("Não foi possível carregar o ponto.");
-        }
-
-        const ponto = await resposta.json();
+       const ponto = await buscarPonto(id);
 
         document.getElementById("name").value = ponto.name;
         document.getElementById("description").value = ponto.description || "";
@@ -87,20 +81,11 @@ formulario.addEventListener("submit", async function (evento) {
     botaoSalvar.textContent = "Salvando...";
 
     try {
-        const resposta = await fetch(
-            id ? `${API_URL}/${id}` : API_URL,
-            {
-                method: id ? "PUT" : "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(ponto)
-            }
-        );
-
-        if (!resposta.ok) {
-            throw new Error("Não foi possível salvar o ponto.");
-        }
+       if (id) {
+    await atualizarPonto(id, ponto);
+    } else {
+        await criarPonto(ponto);
+    }
 
         alert(id ? "Ponto atualizado com sucesso!" : "Ponto cadastrado com sucesso!");
 

@@ -12,16 +12,9 @@
         try {
             mensagem.textContent = "Carregando pontos...";
 
-            const resposta = await fetch(API_URL);
-
-            if (!resposta.ok) {
-                throw new Error("Não foi possível carregar os pontos.");
-            }
-
-            pontos = await resposta.json();
+            const pontos = await listarPontos();
 
             mostrarPontos(pontos);
-            mostrarMarcadores(pontos);
 
         } catch (erro) {
             mensagem.textContent = erro.message;
@@ -88,7 +81,7 @@
         });
 
         mostrarPontos(resultado);
-        mostrarMarcadores(resultado);
+
     });
 
     // Excluir um ponto
@@ -100,13 +93,7 @@
         }
 
         try {
-            const resposta = await fetch(`${API_URL}/${id}`, {
-                method: "DELETE"
-            });
-
-            if (!resposta.ok) {
-                throw new Error("Não foi possível excluir o ponto.");
-            }
+           await excluirPontoAPI(id);
 
             alert("Ponto excluído com sucesso!");
 
@@ -119,47 +106,3 @@
 
     // Iniciar a listagem
     carregarPontos();
-
-   
-    const mapa = L.map("mapa").setView([-14.235, -51.9253], 4);
-    const camadaMarcadores = L.layerGroup().addTo(mapa);
-
-
-    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-    attribution: '&copy; OpenStreetMap contributors',
-    maxZoom: 19
-    }).addTo(mapa);
-
-    function mostrarMarcadores(lista) {
-        camadaMarcadores.clearLayers();
-        const coordenadas = [];
-        lista.forEach(function (ponto){
-            const latitude = Number(ponto.latitude);
-            const longitude = Number(ponto.longitude);
-
-            if (
-                !Number.isFinite(latitude) ||
-                !Number.isFinite(longitude) ||
-                latitude < -90 ||
-                latitude > 90 ||
-                longitude < -180 ||
-                longitude > 180
-            ) {
-                return;
-            }
-
-            const marcador = L.marker([latitude, longitude]).addTo(camadaMarcadores);
-            coordenadas.push([latitude,longitude]);
-
-            marcador.bindPopup(
-                `<strong>${ponto.name}</strong>`
-            );
-        });
-
-        if(coordenadas.length > 0){
-            mapa.fitBounds(coordenadas, {
-                padding: [40, 40],
-                maxZoom: 13
-            });
-        }
-    }
