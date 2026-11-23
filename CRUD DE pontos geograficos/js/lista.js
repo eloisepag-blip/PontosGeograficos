@@ -21,12 +21,51 @@
         }
     }
     function criarCelula(texto) {
-        const celula = document.createElement("id");
+        const celula = document.createElement("td");
         celula.textContent = texto;
         return celula;
     }
 
-    // Mostrar os pontos na tabela
+  
+    function criarLink(texto, destino) {
+    const link = document.createElement("a");
+    link.href = destino;
+    link.textContent = texto;
+    return link;
+    }
+
+    // Criar botões reutilizáveis
+    function criarBotao(texto, acao) {
+    const botao = document.createElement("button");
+    botao.textContent = texto;
+    botao.type = "button";
+    botao.addEventListener("click", acao);
+    return botao;
+    }
+
+    function criarLinhaPonto(ponto) {
+        const linha = document.createElement("tr");
+        const nome = criarCelula(ponto.name);
+        const descricao = criarCelula(ponto.description || "Sem descrição");
+        const latitude = criarCelula(ponto.latitude);
+        const longitude = criarCelula(ponto.longitude);
+        const acoes = document.createElement("td");
+
+        const botaoVer = criarLink("Ver", `ponto.html?id=${ponto.id}`);
+
+        const botaoEditar = criarLink("Editar", `formulario.html?id=${ponto.id}`);
+
+        const botaoExcluir = criarBotao("Excluir", function () {
+        excluirPonto(ponto.id);
+        });
+
+        acoes.append(botaoVer, " | ", botaoEditar, " | ", botaoExcluir);
+
+        linha.append(nome, descricao, latitude, longitude, acoes);
+
+        return linha;
+    }
+
     function mostrarPontos(lista) {
         tabela.innerHTML = "";
 
@@ -38,34 +77,7 @@
         mensagem.textContent = "";
 
         lista.forEach(function (ponto) {
-            const linha = document.createElement("tr");
-
-            const nome = criarCelula(ponto.name);
-            const descricao = criarCelula(ponto.description || "Sem descrição");
-            const latitude = criarCelula(ponto.latitude);
-            const longitude = criarCelula(ponto.longitude);
-
-            const acoes = document.createElement("td");
-
-            const botaoVer = document.createElement("a");
-            botaoVer.href = `ponto.html?id=${ponto.id}`;
-            botaoVer.textContent = "Ver";
-
-            const botaoEditar = document.createElement("a");
-            botaoEditar.href = `formulario.html?id=${ponto.id}`;
-            botaoEditar.textContent = "Editar";
-
-            const botaoExcluir = document.createElement("button");
-            botaoExcluir.textContent = "Excluir";
-            botaoExcluir.type = "button";
-            botaoExcluir.addEventListener("click", function () {
-                excluirPonto(ponto.id);
-            });
-
-            acoes.append(botaoVer, " | ", botaoEditar, " | ", botaoExcluir);
-
-            linha.append(nome, descricao, latitude, longitude, acoes);
-
+            const linha = criarLinhaPonto(ponto);
             tabela.appendChild(linha);
         });
     }
