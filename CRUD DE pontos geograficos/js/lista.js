@@ -14,7 +14,19 @@
 
             pontos = await listarPontos();
 
-            mostrarPontos(pontos);
+            const pesquisa = campoBusca.value.toLowerCase().trim();
+
+const pontosFiltrados = pontos.filter(function (ponto) {
+    return ponto.name.toLowerCase().includes(pesquisa);
+});
+
+mostrarPontos(pontosFiltrados);
+        const mensagemSucesso = sessionStorage.getItem("mensagemSucesso");
+
+        if (mensagemSucesso) {
+            mensagem.textContent = mensagemSucesso;
+            sessionStorage.removeItem("mensagemSucesso");
+        }
 
         } catch (erro) {
             mensagem.textContent = erro.message;
@@ -45,7 +57,14 @@
 
     function criarLinhaPonto(ponto) {
         const linha = document.createElement("tr");
-        const nome = criarCelula(ponto.name);
+        const nome = document.createElement("td");
+
+        const linkNome = criarLink(
+            ponto.name,
+            `ponto.html?id=${ponto.id}`
+        );
+
+        nome.appendChild(linkNome);
         const descricao = criarCelula(ponto.description || "Sem descrição");
         const latitude = criarCelula(ponto.latitude);
         const longitude = criarCelula(ponto.longitude);
@@ -96,23 +115,38 @@
 
     // Excluir um ponto
     async function excluirPonto(id) {
-        const confirmar = confirm("Tem certeza que deseja excluir este ponto?");
+        const confirmar = await new Promise((resolve) => {
+        const modal = document.getElementById("modal-exclusao");
+        const botaoCancelar = document.getElementById("cancelar-exclusao");
+        const botaoConfirmar = document.getElementById("confirmar-exclusao");
 
-        if (!confirmar) {
-            return;
-        }
+        modal.hidden = false;
+
+        botaoCancelar.onclick = () => {
+            modal.hidden = true;
+            resolve(false);
+        };
+
+        botaoConfirmar.onclick = () => {
+            modal.hidden = true;
+            resolve(true);
+        };
+    });
+
+    if (!confirmar) {
+        return;
+    }
 
         try {
            await excluirPontoAPI(id);
 
-            alert("Ponto excluído com sucesso!");
+           await carregarPontos();
 
-            carregarPontos();
+            mensagem.textContent = "Ponto excluído com sucesso!";
 
         } catch (erro) {
             alert(erro.message);
         }
     }
 
-    // Iniciar a listagem
     carregarPontos();

@@ -178,6 +178,21 @@
         background-color: #eeeeee;
     }
 
+    td:first-child a {
+        background-color: transparent;
+        color: #000000;
+        border: none;
+        padding: 0;
+        font-size: 14px;
+        font-weight: 500;
+        text-decoration: underline;
+    }
+
+    td:first-child a:hover {
+        background-color: transparent;
+        color: #555555;
+    }
+
     /* Mensagens da listagem */
     #mensagem-pontos {
         margin-top: 15px;
@@ -308,9 +323,67 @@
         margin-right: 8px;
     }
 
+        /* Janela de confirmação de exclusão */
+    .modal[hidden] {
+        display: none;
+    }
+
+    .modal {
+        position: fixed;
+        inset: 0;
+        background-color: rgba(0, 0, 0, 0.55);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        z-index: 1000;
+    }
+
+    .modal-conteudo {
+        background-color: #ffffff;
+        padding: 28px;
+        border-radius: 12px;
+        width: 100%;
+        max-width: 400px;
+        box-sizing: border-box;
+    }
+
+    .modal-conteudo h2 {
+        font-size: 20px;
+        margin-bottom: 12px;
+    }
+
+    .modal-conteudo p {
+        margin-bottom: 24px;
+    }
+
+    .modal-botoes {
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+    }
+
+    .modal-botoes button {
+        padding: 10px 18px;
+        border-radius: 6px;
+        cursor: pointer;
+    }
+
+    #cancelar-exclusao {
+        background-color: #ffffff;
+        color: #000000;
+        border: 1px solid #000000;
+    }
+
+    #confirmar-exclusao {
+        background-color: #000000;
+        color: #ffffff;
+        border: 1px solid #000000;
+    }
 
 
-    
+
+        
 
 
 

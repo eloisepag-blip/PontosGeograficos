@@ -26,7 +26,7 @@ async function carregarPonto() {
         titulo.textContent = "Editar Ponto Geográfico";
 
     } catch (erro) {
-        alert(erro.message);
+       mostrarErro("name", erro.message);
     }
 }
 
@@ -39,10 +39,24 @@ if (id) {
 
 formulario.addEventListener("submit", async function (evento) {
     evento.preventDefault();
+
+    const latitudeVazia = document.getElementById("latitude").value.trim() === "";
+    const longitudeVazia = document.getElementById("longitude").value.trim() === "";
     
     mostrarErro("name", "");
     mostrarErro("latitude", "");
     mostrarErro("longitude", "");
+
+    mostrarErro("description", "");
+
+    if (latitudeVazia) {
+    mostrarErro("latitude", "A latitude não pode estar vazia.");
+}
+
+if (longitudeVazia) {
+    mostrarErro("longitude", "A longitude não pode estar vazia.");
+}
+
 
     const ponto = {
         name: document.getElementById("name").value.trim(),
@@ -53,7 +67,14 @@ formulario.addEventListener("submit", async function (evento) {
 
     if (ponto.name === "") {
     mostrarErro("name", "O nome do ponto não pode estar vazio.");
-    return;
+}
+
+if (ponto.name.length > 100) {
+    mostrarErro("name", "O nome deve ter no máximo 100 caracteres.");
+}
+
+if (ponto.description.length > 255) {
+    mostrarErro("description", "A descrição deve ter no máximo 255 caracteres.");
 }
 
     if(
@@ -63,7 +84,6 @@ formulario.addEventListener("submit", async function (evento) {
         ponto.latitude > 90
     ) {
         mostrarErro("latitude", "A latitude deve estar entre -90 e 90. ");
-        return;
     }
 
     if (
@@ -73,8 +93,23 @@ formulario.addEventListener("submit", async function (evento) {
         ponto.longitude > 180
     ){
         mostrarErro("longitude", "A longitude deve estar entre -180 e 180.");
-        return;
     }
+
+    if (
+    ponto.name === "" ||
+    ponto.name.length > 100 ||
+    ponto.description.length > 255 ||
+    latitudeVazia ||
+    longitudeVazia ||
+    !Number.isFinite(ponto.latitude) ||
+    ponto.latitude < -90 ||
+    ponto.latitude > 90 ||
+    !Number.isFinite(ponto.longitude) ||
+    ponto.longitude < -180 ||
+    ponto.longitude > 180
+) {
+    return;
+}
 
 
     botaoSalvar.disabled = true;
@@ -87,12 +122,16 @@ formulario.addEventListener("submit", async function (evento) {
         await criarPonto(ponto);
     }
 
-        alert(id ? "Ponto atualizado com sucesso!" : "Ponto cadastrado com sucesso!");
+    const mensagemSucesso = id
+        ? "Ponto atualizado com sucesso!"
+        : "Ponto cadastrado com sucesso!";
 
-        window.location.href = "index.html";
+    sessionStorage.setItem("mensagemSucesso", mensagemSucesso);
+
+    window.location.href = "index.html";
 
     } catch (erro) {
-        alert(erro.message);
+        mostrarErro("name", erro.message);
 
     } finally {
         botaoSalvar.disabled = false;
