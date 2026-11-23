@@ -69,41 +69,6 @@
         font-size: 15px;
         margin: 0;
     }
-    
-    /* Marcador de localização */
-    .area-mapa::after {
-        content: "";
-        position: absolute;
-        width: 25px;
-        height: 25px;
-        background-color: #d62828;
-        border: 4px solid #ffffff;
-        border-radius: 50% 50% 50% 0;
-        transform: rotate(-45deg);
-        top: 40%;
-        left: 50%;
-        box-shadow: 0 2px 6px #777777;
-    }
-
-    .area-mapa h3,
-    .area-mapa p {
-        position: relative;
-        z-index: 1;
-        background-color: rgba(255, 255, 255, 0.85);
-        padding: 6px 12px;
-        border-radius: 5px;
-    }
-
-    .area-mapa h3 {
-        font-size: 18px;
-        margin-bottom: 5px;
-    }
-
-    .area-mapa p {
-        color: #555555;
-        font-size: 13px;
-    }
-
 
     /* Barra de pesquisa e cadastro */
     .barra-acoes {
@@ -178,6 +143,39 @@
 
     tbody tr:hover {
         background-color: #f8f8f8;
+    }
+
+
+    td a,
+    td button {
+        display: inline-block;
+        padding: 7px 12px;
+        border-radius: 5px;
+        font-family: Arial, sans-serif;
+        font-size: 13px;
+        text-decoration: none;
+        cursor: pointer;
+        transition: background-color 0.2s;
+    }
+
+    td a {
+        background-color: #000000;
+        color: #ffffff;
+        border: 1px solid #000000;
+    }
+
+    td a:hover {
+        background-color: #333333;
+    }
+
+    td button {
+        background-color: #ffffff;
+        color: #000000;
+        border: 1px solid #000000;
+    }
+
+    td button:hover {
+        background-color: #eeeeee;
     }
 
     /* Mensagens da listagem */
@@ -285,10 +283,6 @@
             text-align: center;
         }
 
-        .area-mapa {
-            min-height: 180px;
-        }
-
         table {
             min-width: 650px;
         }
@@ -307,6 +301,11 @@
 
     .mensagem-erro:empty {
         display: none;
+    }
+
+    td a,
+    td button {
+        margin-right: 8px;
     }
 
 

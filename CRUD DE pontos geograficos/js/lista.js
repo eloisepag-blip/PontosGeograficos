@@ -59,7 +59,7 @@
         excluirPonto(ponto.id);
         });
 
-        acoes.append(botaoVer, " | ", botaoEditar, " | ", botaoExcluir);
+        acoes.append(botaoVer, botaoEditar, botaoExcluir);
 
         linha.append(nome, descricao, latitude, longitude, acoes);
 
