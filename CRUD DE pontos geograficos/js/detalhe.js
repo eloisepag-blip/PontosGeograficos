@@ -57,11 +57,27 @@ async function excluirPonto() {
         return;
     }
 
-    const confirmar = confirm("Tem certeza que deseja excluir este ponto?");
+    const confirmar = await new Promise((resolve) => {
+    const modal = document.getElementById("modal-exclusao");
+    const botaoCancelar = document.getElementById("cancelar-exclusao");
+    const botaoConfirmar = document.getElementById("confirmar-exclusao");
 
-    if (!confirmar) {
-        return;
-    }
+    modal.hidden = false;
+
+    botaoCancelar.onclick = () => {
+        modal.hidden = true;
+        resolve(false);
+    };
+
+    botaoConfirmar.onclick = () => {
+        modal.hidden = true;
+        resolve(true);
+    };
+});
+
+if (!confirmar) {
+    return;
+}
 
     botaoExcluir.disabled = true;
     botaoExcluir.textContent = "Excluindo...";
@@ -69,11 +85,11 @@ async function excluirPonto() {
     try {
         await excluirPontoAPI(id);
 
-        alert("Ponto excluído com sucesso!");
-        window.location.href = "index.html";
+        sessionStorage.setItem("mensagemSucesso", "Ponto excluído com sucesso!");
+window.location.href = "index.html";
 
     } catch (erro) {
-        alert(erro.message);
+        mensagem.textContent = erro.message;
         botaoExcluir.disabled = false;
         botaoExcluir.textContent = "Excluir";
     }
